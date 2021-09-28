@@ -1,5 +1,5 @@
 #!/bin/bash
-#az storage blob list -c mycontainer --account-name storageaccount > list.json
+#az storage blob list -c mycontainer --account-name mystorageaccount > mycontainer.json
 for i in *.json; do
 	echo "name,size,modified date" > "${i%.*}".csv
 	cat "$i" | jq -r '.[].name' > name.txt
