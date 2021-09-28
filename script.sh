@@ -2,7 +2,6 @@
 #az storage blob list -c mycontainer --account-name storageaccount > list.json
 for i in *.json
 do
-	echo "$i"
 	echo "name,size,modified date" > "$i".csv
 	cat "$i" | jq -r '.[].name' > name.txt
 	cat "$i" | jq -r '.[].properties.contentLength' > size.txt
