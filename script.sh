@@ -1,8 +1,12 @@
 #!/bin/bash
 #az storage blob list -c mycontainer --account-name storageaccount > list.json
-echo "name,size,modified date" > output.csv
-cat list.json | jq -r '.[].name' > name.txt
-cat list.json | jq -r '.[].properties.contentLength' > size.txt
-cat list.json | jq -r '.[].properties.lastModified' > date.txt
-paste -d "," name.txt size.txt date.txt >> output.csv
-rm name.txt size.txt date.txt
+for i in *.json
+do
+	echo "$i"
+	echo "name,size,modified date" > "$i".csv
+	cat "$i" | jq -r '.[].name' > name.txt
+	cat "$i" | jq -r '.[].properties.contentLength' > size.txt
+	cat "$i" | jq -r '.[].properties.lastModified' > date.txt
+	paste -d "," name.txt size.txt date.txt >> "$i".csv
+	rm name.txt size.txt date.txt
+done
