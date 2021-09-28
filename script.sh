@@ -7,6 +7,6 @@ for i in *.json; do
 	cat "$i" | jq '.[].properties.contentLength' > size.txt
 	cat "$i" | jq  '.[].properties.lastModified' > date.txt
 	paste -d "," name.txt size.txt date.txt >> "${i%.*}".csv
-	ssconvert --merge-to=combined.xls *.csv
+	ssconvert --merge-to=Container-Export-`date +%F_%H%M%S`.xls *.csv
 	rm name.txt size.txt date.txt
 done
